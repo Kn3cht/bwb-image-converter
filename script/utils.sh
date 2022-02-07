@@ -50,7 +50,7 @@ function createFbImages {
     then
         log_info "Image $1 cannot be converted to facebook formats due to a wrong format ([width=$width] < [height=$height])"
     else
-        if [ "$width" -gt 720 ]; # & [ $height -gt 1080 ] 
+        if [ "$width" -ge 720 ]; # & [ $height -gt 1080 ] 
         then
             # Facebook conversion s 720px
             xOffset=50
@@ -73,7 +73,7 @@ function createFbImages {
             log_info "Image $1 too small for facebook conversion: $fb_res_s"
         fi
 
-        if [ "$width" -gt 960 ]; # & [ $height -gt 1080 ] 
+        if [ "$width" -ge 960 ]; # & [ $height -gt 1080 ] 
         then
             # Facebook conversion m 960 px
             xOffset=60
@@ -97,7 +97,7 @@ function createFbImages {
             log_info "Image $1 too small for facebook conversion: $fb_res_m"
         fi
         
-        if [ "$width" -gt 2048 ]; # & [ $height -gt 1080 ] 
+        if [ "$width" -ge 2048 ]; # & [ $height -gt 1080 ] 
         then
             # Facebook conversion x 2048 px
             xOffset=99
@@ -130,7 +130,7 @@ function createInstaImage {
     width=$(identify -format '%w' "$1")
     height=$(identify -format '%h' "$1")
 
-    if [ "$width" -gt 1080 ] & [ "$height" -gt 1080 ];
+    if [ "$width" -ge 1080 ] & [ "$height" -ge 1080 ];
     then
         # Resize
         convert $1 -resize $insta_res $insta_dest_file
