@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Assumes the "magick" command has been installed
 #
@@ -13,7 +13,7 @@ source "./script/progress.sh"
 now=$(date)
 
 ## Folder structure
-declare -a folders=("landung" "backup" "instagram" "facebook" "logo" "log")
+declare -a folders=("landung" "backup" "instagram" "facebook" "logo")
 
 if [ ! -d "${src_folder}" ];
    then
@@ -30,6 +30,11 @@ do
 	fi
 done
 
+# create log file
+if [[ ! -e ./log ]]; then
+    mkdir ./log
+fi
+
 ## Check if folder empty
 no_files=$(countElements ${landung})
 echo "${no_files} file(s) found in ${landung}"
@@ -43,13 +48,17 @@ echo "Starting backup from ${landung} to ${backup}"
 cp "${landung}/"* $backup
 echo "Backup complete"
 
-## Scale images
+cd ${landung}
+for f in *; do mv "$f" `echo $f | tr ' ' '_'`; done
+cd ../..
+
 ITER=0
 
-for img in "${landung}"/*;
+for img in "${landung}/*";
 do
 	ProgressBar ${ITER} ${no_files}
 
+	
 	# FB conversion
 	createFbImages $img
 
@@ -65,4 +74,4 @@ ProgressBar ${no_files} ${no_files}
 # echo "Purging ${landung}"
 # rm "${landung}"/*
 
-echo "\nComplete."
+echo " Complete."

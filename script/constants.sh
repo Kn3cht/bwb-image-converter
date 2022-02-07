@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Assumes the "magick" command has been installed
 #

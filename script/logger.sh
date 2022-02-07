@@ -1,3 +1,8 @@
+#!/bin/bash
+#
+# Assumes the "magick" command has been installed
+#
+
 function log_info {
-    echo "$now [INFO]: $1 " >> "$src_folder/log/info.log"
+    echo "$now [INFO]: $1 " >> "./log/info.log"
 }
