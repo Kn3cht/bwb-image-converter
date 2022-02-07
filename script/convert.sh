@@ -54,10 +54,9 @@ cd ../..
 
 ITER=0
 
-for img in "${landung}/*";
+for img in $landung/*;
 do
 	ProgressBar ${ITER} ${no_files}
-
 	
 	# FB conversion
 	createFbImages $img
