@@ -3,6 +3,8 @@
 # Assumes the "magick" command has been installed
 #
 
+clear=$1
+
 cat "./script/header.txt"
 
 ## Imports
@@ -68,9 +70,11 @@ do
 done
 ProgressBar ${no_files} ${no_files}
 
-
-## Delete content in landung
-# echo "Purging ${landung}"
-# rm "${landung}"/*
-
 echo " Complete."
+
+if [ -z "$1" ] & [ "$1" = "--clear" ];
+then
+    ## Delete content in landung
+	echo "Purging ${landung}"
+	rm "${landung}"/*
+fi
